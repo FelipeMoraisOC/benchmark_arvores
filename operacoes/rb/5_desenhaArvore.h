@@ -1,5 +1,5 @@
-#ifndef DESENHA_ARVORE_H
-#define DESENHA_ARVORE_H
+#ifndef DESENHA_ARVORE_RB_H
+#define DESENHA_ARVORE_RB_H
 
 #define ESPACO 5
 

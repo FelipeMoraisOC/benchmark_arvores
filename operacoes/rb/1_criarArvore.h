@@ -1,5 +1,5 @@
-#ifndef CRIAR_ARVORE_H
-#define CRIAR_ARVORE_H
+#ifndef CRIAR_ARVORE_RB_H
+#define CRIAR_ARVORE_RB_H
 
 /* --------------------------*/
 pDArvoreRb criarArvoreRb(){

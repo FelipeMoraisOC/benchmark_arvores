@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "0_struct_arvore.h": "c",
+        "13_desenhaarvore.h": "c",
+        "0_struct_descritor.h": "c",
+        "4_buscarinfo.h": "c",
+        "8_altura.h": "c",
+        "1_criararvore.h": "c",
+        "3_excluirinfo.h": "c"
+    }
+}

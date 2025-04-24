@@ -1,14 +1,14 @@
-#ifndef BUSCAR_INFO_H
-#define BUSCAR_INFO_H
+#ifndef BUSCAR_INFO_RB_H
+#define BUSCAR_INFO_RB_H
 
-pNohArvore buscarInfoRecursivo (pNohArvore raiz, void *info, FuncaoComparacao pfc)
+pNohArvoreRb buscarInfoRbRecursivo (pNohArvoreRb raiz, void *info, FuncaoComparacao pfc)
 {
 
 }
 
 
 /* ----------------------------------------------------------*/
-pNohArvore buscarInfo (pDArvore arvore, void *info, FuncaoComparacao pfc)
+pNohArvoreRb buscarInfoRb (pDArvoreRb arvore, void *info, FuncaoComparacao pfc)
 {
 
 }

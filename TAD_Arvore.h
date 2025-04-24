@@ -4,7 +4,7 @@
 /* tipos de dados                           */
 /*------------------------------------------*/
 
-/* estrutura do noh da arvore ABB */
+/* estrutura do noh da arvore ABB/AVL */
 typedef struct nohArvore  NohArvore;
 typedef NohArvore*        pNohArvore;
 
@@ -12,33 +12,20 @@ typedef NohArvore*        pNohArvore;
 typedef struct dArvore  DArvore;
 typedef DArvore*        pDArvore;
 
-
-
-
 /* tipos referentes aos ponteiros para funcao */
 typedef int  (*FuncaoComparacao)(void*, void*);
 typedef void (*FuncaoImpressao) (void*);
 
 
 
-/* percursos */
-void      emOrdem  (pNohArvore, FuncaoImpressao);
-void      preOrdem (pNohArvore, FuncaoImpressao);
-void      posOrdem (pNohArvore, FuncaoImpressao);
-
-int       altura          (pDArvore);
 int       grau            (pDArvore);
 int       nivel           (pDArvore, void *, FuncaoComparacao);
-int       quantidadeFolhas(pDArvore);
-int       ehFolha         (pDArvore, void *, FuncaoComparacao);
-int       arvoreVazia     (pDArvore);
 
 void desenhaArvore(pDArvore, FuncaoImpressao);
 
-void recolorir(pNohArvore);
+
 
 /*------------------------------------------*/
-/*--------------- ⚛️⚛️⚛️⚛️----------------*/
 /*             ⏪ BenchMark ⏩             */
 /*------------------------------------------*/
 
@@ -46,8 +33,20 @@ pDArvore  criarArvore(int);
 
 void       incluirInfo    (pDArvore, void *, FuncaoComparacao);
 int        excluirInfo    (pDArvore, void *, FuncaoComparacao);
-pNohArvore buscarInfo     (pDArvore, void *, FuncaoComparacao);
+int        buscarInfo     (pDArvore, void *, FuncaoComparacao);
 int        quantidadeNohs (pDArvore);
+
+/* 🧘‍♂️     AVL     🧘‍♂️*/
+pDArvore  criarArvoreAVL();
+
+void       incluirInfoAVL       (pDArvore, void *, FuncaoComparacao);
+int        excluirInfoAVL       (pDArvore, void *, FuncaoComparacao);
+int        buscarInfoAVL        (pDArvore, void *, FuncaoComparacao);
+
+void      recalcularFBRecursiva (pNohArvore raiz);
+int       altura                (pDArvore);
+int       alturaRecursivo       (pNohArvore raiz);
+
 
 /* 🔴 Rubro Negra ⚫*/
 typedef struct nohArvoreRb  NohArvoreRb;
@@ -61,7 +60,8 @@ pDArvoreRb  criarArvoreRb();
 void         incluirInfoRb      (pDArvoreRb, void *, FuncaoComparacao);
 int          excluirInfoRb      (pDArvoreRb, void *, FuncaoComparacao);
 pNohArvoreRb buscarInfoRb       (pDArvoreRb, void *, FuncaoComparacao);
-int          quantidadeNohsRb   (pDArvoreRb);
+
+void recolorir(pNohArvoreRb);
 
 void desenhaArvoreRb(pDArvoreRb, FuncaoImpressao);
 

@@ -1,5 +1,5 @@
-#ifndef STRUCT_ARVORE_H
-#define STRUCT_ARVORE_H
+#ifndef STRUCT_ARVORE_RB_H
+#define STRUCT_ARVORE_RB_H
 
 #define RED         'R'
 #define BLACK       'B'
