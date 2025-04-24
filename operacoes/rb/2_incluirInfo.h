@@ -2,7 +2,7 @@
 #define INCLUIR_INFO_RUBRO_NEGRA_H
 
 //----------------------------------
-pNohArvore rotacaoDireita(pNohArvore raiz){
+pNohArvoreRb rotacaoDireitaRb(pNohArvoreRb raiz){
 
     raiz->pai->esquerda = raiz->direita;
     raiz->direita       = raiz->pai;
@@ -12,7 +12,7 @@ pNohArvore rotacaoDireita(pNohArvore raiz){
     raiz->cor      = BLACK;
 
     // ajustar os pais
-    pNohArvore avo = raiz->pai->pai;
+    pNohArvoreRb avo = raiz->pai->pai;
     raiz->pai->pai = raiz;
     raiz->pai      = avo;
 
@@ -20,7 +20,7 @@ pNohArvore rotacaoDireita(pNohArvore raiz){
 }
 
 //----------------------------------
-pNohArvore rotacaoEsquerda(pNohArvore raiz){
+pNohArvoreRb rotacaoEsquerdaRb(pNohArvoreRb raiz){
 
     raiz->pai->direita = raiz->esquerda;
     raiz->esquerda     = raiz->pai;
@@ -30,7 +30,7 @@ pNohArvore rotacaoEsquerda(pNohArvore raiz){
     raiz->cor      = BLACK;
 
     // ajustar os pais
-    pNohArvore avo = raiz->pai->pai;
+    pNohArvoreRb avo = raiz->pai->pai;
     raiz->pai->pai = raiz;
     raiz->pai      = avo;
 
@@ -39,9 +39,9 @@ pNohArvore rotacaoEsquerda(pNohArvore raiz){
 
 
 //----------------------------------
-pNohArvore rotacaoDuplaEsquerda(pNohArvore raiz){
+pNohArvoreRb rotacaoDuplaEsquerdaRb(pNohArvoreRb raiz){
 
-    pNohArvore filho = raiz->esquerda;
+    pNohArvoreRb filho = raiz->esquerda;
     raiz->esquerda    = filho->direita;
     filho->direita  = raiz;
 
@@ -51,13 +51,13 @@ pNohArvore rotacaoDuplaEsquerda(pNohArvore raiz){
     filho->pai = raiz->pai;
     raiz->pai  = filho;
 
-    return rotacaoEsquerda(filho);
+    return rotacaoEsquerdaRb(filho);
 }
 
 //----------------------------------
-pNohArvore rotacaoDuplaDireita(pNohArvore raiz){
+pNohArvoreRb rotacaoDuplaDireitaRb(pNohArvoreRb raiz){
 
-    pNohArvore filho = raiz->direita;
+    pNohArvoreRb filho = raiz->direita;
     raiz->direita    = filho->esquerda;
     filho->esquerda  = raiz;
 
@@ -67,11 +67,11 @@ pNohArvore rotacaoDuplaDireita(pNohArvore raiz){
     filho->pai = raiz->pai;
     raiz->pai  = filho;
 
-    return rotacaoDireita(filho);
+    return rotacaoDireitaRb(filho);
 }
 
 //=================================
-pNohArvore tio(pNohArvore filho){
+pNohArvoreRb tio(pNohArvoreRb filho){
 
     if(filho->pai->pai->esquerda == filho->pai)
        return filho->pai->pai->direita;
@@ -81,13 +81,13 @@ pNohArvore tio(pNohArvore filho){
 }
 
 /* ---------------------------------------------------------------------*/
-pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *info, FuncaoComparacao pfc){
+pNohArvoreRb incluirInfoRbRecursivo(pNohArvoreRb raiz, pNohArvoreRb sentinela, void *info, FuncaoComparacao pfc){
 
 
     // caso base
     if (raiz == NULL || raiz == sentinela){
 
-        pNohArvore novo = malloc(sizeof(NohArvore));
+        pNohArvoreRb novo = malloc(sizeof(NohArvoreRb));
         novo->info     = info;
         novo->cor      = RED;
         novo->esquerda = sentinela;
@@ -98,11 +98,11 @@ pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *inf
 
     }
     else{
-       pNohArvore filho;
+        pNohArvoreRb filho;
        /* caso recursivo */
        if (pfc(info, raiz->info) >= 0){
 
-           filho = incluirInfoRecursivo(raiz->esquerda, sentinela, info, pfc);
+           filho = incluirInfoRbRecursivo(raiz->esquerda, sentinela, info, pfc);
            // verifica se houve rota��o
            if(filho->direita == raiz){
               raiz = filho;
@@ -114,7 +114,7 @@ pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *inf
 
         }
         else {
-           filho = incluirInfoRecursivo(raiz->direita, sentinela, info, pfc);
+           filho = incluirInfoRbRecursivo(raiz->direita, sentinela, info, pfc);
            // verifica se houve rota��o
            if(filho->esquerda == raiz){
               raiz = filho;
@@ -154,7 +154,7 @@ pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *inf
         // ----------------------------------------------
         // Caso 2: pai e tio com cores diferentes
             // S�o 4 possibilidades:
-        pNohArvore novaRaiz;
+        pNohArvoreRb novaRaiz;
         if (tio(filho)==NULL || tio(filho)->cor == BLACK){
 
             // rota��o simples a direita
@@ -163,9 +163,9 @@ pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *inf
                 if(raiz->pai->esquerda == raiz)
                 {
                    // precisa fazer rota�ao simples a direita
-                   novaRaiz = rotacaoDireita(raiz);
+                   novaRaiz = rotacaoDireitaRb(raiz);
                 } else{
-                   novaRaiz = rotacaoDuplaEsquerda(raiz);
+                   novaRaiz = rotacaoDuplaEsquerdaRb(raiz);
                 }
             }
 
@@ -174,9 +174,9 @@ pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *inf
                 // decidir se precisa fazer rota�ao simples ou dupla
                 if (raiz->pai->direita == raiz) {
                     // precisa fazer rota�ao simples a esquerda
-                    novaRaiz = rotacaoEsquerda(raiz);
+                    novaRaiz = rotacaoEsquerdaRb(raiz);
                 } else{
-                    novaRaiz = rotacaoDuplaDireita(raiz);
+                    novaRaiz = rotacaoDuplaDireitaRb(raiz);
                 }
             }
             //printf("Nova raiz %d", *((int*)novaRaiz->info));
@@ -188,13 +188,11 @@ pNohArvore incluirInfoRecursivo(pNohArvore raiz, pNohArvore sentinela, void *inf
 }
 
 /* ----------------------------------------------------------*/
-void incluirInfo(pDArvore arvore, void *info, FuncaoComparacao pfc){
-
-    printf("\n ----------- Incluindo info: %d ---\n", *((int*)info));
-    arvore->raiz = incluirInfoRecursivo(arvore->raiz, arvore->sentinela, info, pfc);
+void incluirInfoRb(pDArvoreRb arvore, void *info, FuncaoComparacao pfc)
+{
+    arvore->raiz = incluirInfoRbRecursivo(arvore->raiz, arvore->sentinela, info, pfc);
     arvore->raiz->cor = BLACK;
     arvore->quantidadeNohs++;
-    desenhaArvore(arvore, imprimeInt);
 }
 
 #endif

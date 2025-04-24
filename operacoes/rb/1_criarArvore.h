@@ -2,12 +2,12 @@
 #define CRIAR_ARVORE_H
 
 /* --------------------------*/
-pDArvore criarArvoreRubroNegra(){
-    pDArvore dArvore = malloc(sizeof(DArvore));
+pDArvoreRb criarArvoreRb(){
+    pDArvoreRb dArvore      = malloc(sizeof(DArvoreRb));
     dArvore->raiz           = NULL;
     dArvore->quantidadeNohs = 0;
     // sentinela
-    dArvore->sentinela      = malloc(sizeof(NohArvore));
+    dArvore->sentinela      = malloc(sizeof(NohArvoreRb));
     dArvore->sentinela->cor = BLACK;
 
     return dArvore;

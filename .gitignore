@@ -1,3 +1,6 @@
+#arquivos temporários (remover para versão final)
+*.txt 
+
 # Prerequisites
 *.d
 

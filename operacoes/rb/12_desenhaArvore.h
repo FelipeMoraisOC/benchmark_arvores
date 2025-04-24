@@ -3,14 +3,14 @@
 
 #define ESPACO 5
 
-void desenhaArvoreRecursivo(pNohArvore raiz, int depth, char *path, int right, FuncaoImpressao fi, pNohArvore sentinela) {
+void desenhaArvoreRbRecursivo(pNohArvoreRb raiz, int depth, char *path, int right, FuncaoImpressao fi, pNohArvoreRb sentinela) {
 
     if (raiz == NULL || raiz == sentinela)
         return;
 
     depth++;
 
-    desenhaArvoreRecursivo(raiz->direita, depth, path, 1, fi, sentinela);
+    desenhaArvoreRbRecursivo(raiz->direita, depth, path, 1, fi, sentinela);
 
     path[depth-2] = 0;
 
@@ -54,13 +54,13 @@ void desenhaArvoreRecursivo(pNohArvore raiz, int depth, char *path, int right, F
           printf(" ");
     }
 
-    desenhaArvoreRecursivo(raiz->esquerda, depth, path, 0, fi, sentinela);
+    desenhaArvoreRbRecursivo(raiz->esquerda, depth, path, 0, fi, sentinela);
 }
 
-void desenhaArvore(pDArvore arvore, FuncaoImpressao fi) {
+void desenhaArvoreRb(pDArvoreRb arvore, FuncaoImpressao fi) {
     char path[255] = {};
 
-    desenhaArvoreRecursivo(arvore->raiz, 0, path, 0, fi, arvore->sentinela);
+    desenhaArvoreRbRecursivo(arvore->raiz, 0, path, 0, fi, arvore->sentinela);
     printf("\n");
 }
 

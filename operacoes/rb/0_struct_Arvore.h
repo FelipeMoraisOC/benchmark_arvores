@@ -6,13 +6,13 @@
 #define DOUBLEBLACK 'W'
 
 
-struct nohArvore{
+struct nohArvoreRb{
    void*              info;
-   struct nohArvore  *esquerda;
-   struct nohArvore  *direita;
+   struct nohArvoreRb  *esquerda;
+   struct nohArvoreRb  *direita;
 
    char               cor;
-   struct nohArvore  *pai;
+   struct nohArvoreRb  *pai;
 };
 
 #endif
