@@ -1,6 +1,12 @@
 #arquivos temporários (remover para versão final)
 *.txt 
 
+## VisualStudioCode ###
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 # Prerequisites
 *.d
 

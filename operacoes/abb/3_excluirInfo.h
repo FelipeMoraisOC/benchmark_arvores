@@ -1,50 +1,63 @@
 #ifndef EXCLUIRINFO_ARVORE_BINARIA_H
 #define EXCLUIRINFO_ARVORE_BINARIA_H
 
-/* --------------------------*/
-pNohArvore excluirInfoRecursivo(pNohArvore raiz, void *info, FuncaoComparacao pfc){
+/* ------------------------------------------------------------*/
+pNohArvore paiFolhaMaisAEsquerda(pNohArvore raiz){
 
-    pNohArvore nohAux;
-    //Caso não encontrou a info
-    if(raiz == NULL)
-        return NULL;
-
-    //Encontrou a info
-    if(pfc(info, raiz->info) == 0)
+    if (raiz->esquerda != NULL)
     {
-        //Caso base excluir folha
-        if(raiz->direita == NULL && raiz->esquerda == NULL)
-        {
-            free(raiz);
-            return NULL;
-        }
-
-        //Caso base noh com um filho
-        
-        if(raiz->direita != NULL && raiz->esquerda == NULL)
-        {
-            nohAux = raiz->direita;
-            free(raiz);
-            return nohAux->direita;
-        }
-        if(raiz->direita == NULL && raiz->esquerda != NULL)
-        {
-            nohAux = raiz->esquerda;
-            free(raiz);
-            return nohAux->esquerda;
-        }
-        
-        //CAso noh com varios filhos 
-        
-            
+        if (raiz->esquerda->esquerda == NULL)
+            return raiz;
     }
-    
-    //Casos recursivos
-    if(pfc(info, raiz->info) > 0)
-        raiz->esquerda =  excluirInfoRecursivo(raiz->esquerda, info, pfc);
+    return paiFolhaMaisAEsquerda(raiz->esquerda);
+}
 
-    if(pfc(info, raiz->info) < 0)
-        raiz->direita =  excluirInfoRecursivo(raiz->direita, info, pfc);
+/* --------------------------*/
+pNohArvore excluirInfoRecursivo(pNohArvore raiz, void *info, FuncaoComparacao fc){
+
+    if (raiz != NULL){
+
+     if (fc(raiz->info, info) == 0) {
+        /* caso base */
+
+        /* antes de liberar a memoria do noh, salva a esquerda e a direita */
+        pNohArvore auxEsquerda = raiz->esquerda;
+        pNohArvore auxDireita  = raiz->direita;
+        free(raiz);
+
+        /* caso 1 - remover noh folha */
+        if (auxEsquerda == NULL && auxDireita == NULL){
+           return NULL;
+        }
+
+        /* caso 3 - remover noh interno com 2 filhos */
+        if (auxEsquerda != NULL && auxDireita != NULL){
+
+            pNohArvore paiFolhaEsquerda;
+            paiFolhaEsquerda = paiFolhaMaisAEsquerda(auxDireita);
+
+            pNohArvore folhaMaisEsquerda = paiFolhaEsquerda->esquerda;
+            folhaMaisEsquerda->esquerda = auxEsquerda;
+            folhaMaisEsquerda->direita  = auxDireita;
+
+            paiFolhaEsquerda->esquerda = NULL;
+
+            return folhaMaisEsquerda;
+        }
+        else{
+           /* caso 2 - remover noh interno com 1 filho*/
+           if (auxEsquerda != NULL)
+              return auxEsquerda;
+
+           return auxDireita;
+        }
+    }
+    /* caso recursivo */
+    else if (fc(raiz->info, info) < 0)
+        raiz->esquerda = excluirInfoRecursivo(raiz->esquerda, info, fc);
+    else
+        raiz->direita  = excluirInfoRecursivo(raiz->direita, info, fc);
+    }
 
     return raiz;
 }
@@ -52,19 +65,10 @@ pNohArvore excluirInfoRecursivo(pNohArvore raiz, void *info, FuncaoComparacao pf
 /* ----------------------------------------------------------*/
 int excluirInfo(pDArvore arvore, void *info, FuncaoComparacao pfc){
 
-    
-    // pNohArvore novaRaiz = excluirInfoRecursivo(arvore->raiz, info, pfc);
-    // if (novaRaiz != NULL){
-    //     // ????
-    // }
-
-    //Caso que considera a exclusão de um nó que é folha
-    pNohArvore novaRaiz = excluirInfoRecursivo(arvore->raiz, info, pfc);
-    if(novaRaiz != NULL)
-        return 1;
-
-
-
+   arvore->raiz = excluirInfoRecursivo(arvore->raiz, info, pfc);
+   /* estah assumindo que sempre excluira */
+   arvore->quantidadeNohs--;
+   return 1;
 }
 
 #endif
