@@ -2,15 +2,15 @@
 #define EXCLUIRINFO_ARVORE_AVL_H
 
 /* ------------------------------------------------------------*/
-pNohArvore paiFolhaMaisAEsquerda(pNohArvore raiz){
+// pNohArvore paiFolhaMaisAEsquerda(pNohArvore raiz){
 
-    if (raiz->esquerda != NULL)
-    {
-        if (raiz->esquerda->esquerda == NULL)
-            return raiz;
-    }
-    return paiFolhaMaisAEsquerda(raiz->esquerda);
-}
+//     if (raiz->esquerda != NULL)
+//     {
+//         if (raiz->esquerda->esquerda == NULL)
+//             return raiz;
+//     }
+//     return paiFolhaMaisAEsquerda(raiz->esquerda);
+// }
 
 /* --------------------------*/
 pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao pfc){

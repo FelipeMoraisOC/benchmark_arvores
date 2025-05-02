@@ -45,10 +45,10 @@ void gerar_e_salvar(const char *nome_arquivo, size_t quantidade) {
 int main() {
     srand((unsigned)time(NULL)); // Inicializa o gerador de números aleatórios
 
-    gerar_e_salvar("1k.txt", 1000);
-    gerar_e_salvar("10k.txt", 10000);
+    gerar_e_salvar("1k.txt",   1000);
+    gerar_e_salvar("10k.txt",  10000);
     gerar_e_salvar("100k.txt", 100000);
-    gerar_e_salvar("1m.txt", 1000000);
+    gerar_e_salvar("1m.txt",   1000000);
 
     return 0;
 }

@@ -57,7 +57,7 @@ void desenhaArvoreRecursivo(pNohArvore raiz, int depth, char *path, int right, F
 }
 
 void desenhaArvore(pDArvore arvore, FuncaoImpressao fi) {
-    char path[255] = {};
+        char path[255] = {};
 
     desenhaArvoreRecursivo(arvore->raiz, 0, path, 0, fi);
     printf("\n");
