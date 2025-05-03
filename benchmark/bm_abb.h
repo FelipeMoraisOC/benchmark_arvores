@@ -32,11 +32,13 @@ double benchmarkExclusaoABB(pDArvore arvore, int* vExclusao, size_t tamanho)
 
 //Benchmark Busca
 
-double benchmarkBuscaABB(pDArvore arvore, int* vBusca)
+double benchmarkBuscaABB(pDArvore arvore, int* resultado, int* vBusca, size_t tamanho)
 {
     clock_t inicio = clock();
-
-
+    for (size_t i = 0; i < tamanho; i++) {
+        *resultado += buscarInfo(arvore, alocaInt(vBusca[i]), comparaInt);
+    }
+    
     clock_t fim = clock();
     return (double) fim - inicio; 
 }
