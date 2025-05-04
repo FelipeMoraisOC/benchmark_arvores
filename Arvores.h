@@ -29,9 +29,6 @@
 #include "operacoes/rb/4_buscarInfo.h"
 #include "operacoes/rb/5_desenhaArvore.h"
 
-
-#include "benchmark/bm_abb.h"
-#include "benchmark/bm_avl.h"
-#include "benchmark/bm_rb.h"
+#include "benchmark/benchmark.h"
 
 #endif

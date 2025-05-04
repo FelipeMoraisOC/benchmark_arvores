@@ -2,15 +2,22 @@
 #define CRIAR_ARVORE_RB_H
 
 /* --------------------------*/
-pDArvoreRb criarArvoreRb(){
-    pDArvoreRb dArvore      = malloc(sizeof(DArvoreRb));
-    dArvore->raiz           = NULL;
-    dArvore->quantidadeNohs = 0;
+pDArvoreRb criarArvoreRb(int* vetor_inclusao, size_t tamanho){
+    pDArvoreRb desc      = malloc(sizeof(DArvoreRb));
+    desc->raiz           = NULL;
+    desc->quantidadeNohs = 0;
     // sentinela
-    dArvore->sentinela      = malloc(sizeof(NohArvoreRb));
-    dArvore->sentinela->cor = BLACK;
+    desc->sentinela      = malloc(sizeof(NohArvoreRb));
+    desc->sentinela->cor = BLACK;
 
-    return dArvore;
+    if(!vetor_inclusao) return desc;
+
+    for (size_t i = 0; i < tamanho; i++) {
+        incluirInfoRb(desc, alocaInt(vetor_inclusao[i]), comparaInt);
+    }
+    printf("Arvore RB com %s dados criada!\n", formatarMilhar(tamanho));
+
+    return desc;
 };
 
 #endif

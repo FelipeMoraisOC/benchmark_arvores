@@ -4,7 +4,7 @@
 void recalcularFBRecursiva(pNohArvore raiz)
 {
     if(raiz == NULL) return;
-
+    
     raiz->fb = alturaRecursivo(raiz->direita) - alturaRecursivo(raiz->esquerda);
 
     recalcularFBRecursiva(raiz->esquerda);

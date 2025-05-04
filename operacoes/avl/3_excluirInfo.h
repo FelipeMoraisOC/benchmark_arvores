@@ -30,12 +30,14 @@ pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao
     //Caso Base
     if(comparacao == 0 )
     {
+        *removido = 1;
         pNohArvore auxRaiz;
 
         //Caso base excluir folha
         if(raiz->direita == NULL && raiz->esquerda == NULL)
         {
             free(raiz);
+            raiz = NULL;
             return NULL;
         }
         //Caso base nós com um filho
@@ -43,23 +45,23 @@ pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao
         {
             auxRaiz = raiz->direita;
             free(raiz);
+            raiz = NULL;
             return auxRaiz->direita;
         } 
         if(raiz->direita == NULL && raiz->esquerda != NULL )
         {
             auxRaiz = raiz->esquerda;
             free(raiz);
+            raiz = NULL;
             return auxRaiz->esquerda;
         }
 
         //Precisa achar o filho mais a direita do filho da esquerda
-        auxRaiz = paiFolhaMaisAEsquerda(raiz);
+        auxRaiz = paiFolhaMaisAEsquerda(raiz->direita);
         free(raiz);
+        raiz = NULL;
         return auxRaiz;    
     } 
-
-
-    recalcularFBRecursiva(raiz);
 
     if (raiz->fb == 2 || raiz->fb == -2)
     {   

@@ -3,13 +3,13 @@
 
 /* ------------------------------------------------------------*/
 pNohArvore paiFolhaMaisAEsquerda(pNohArvore raiz){
-    
     if (raiz->esquerda != NULL)
     {
-        if (raiz->esquerda->esquerda == NULL)
-            return raiz;
+        if (raiz->esquerda->esquerda == NULL) return raiz;
+
+        return paiFolhaMaisAEsquerda(raiz->esquerda);
     }
-    return paiFolhaMaisAEsquerda(raiz->esquerda);
+    return raiz;
 }
 
 /* --------------------------*/
