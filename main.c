@@ -16,6 +16,9 @@ int main() {
     int* vetor10k  = ler_arquivo_para_vetor("dados/10k.txt",  T10K);
     int* vetor100k = ler_arquivo_para_vetor("dados/100k.txt", T100K);
     int* vetor1m   = ler_arquivo_para_vetor("dados/1m.txt",   T1M);
+    //Ordenados para criar AVL 100k e 1M
+    int* vetor_ordenado100k = ler_arquivo_para_vetor("dados/ordenado_100k.txt", T100K);
+    int* vetor_ordenado1m = ler_arquivo_para_vetor("dados/ordenado_1m.txt", T1M);
 
     //Vetores de benchmark de busca
     int* vetor_busca_1k     = ler_arquivo_para_vetor("benchmark/busca_1k.txt",   100);
@@ -40,7 +43,8 @@ int main() {
     if (!vetor_busca_1k    || !vetor_busca_10k    || !vetor_busca_100k    || !vetor_busca_1m)    return EXIT_FAILURE;
     if (!vetor_inclusao_1k || !vetor_inclusao_10k || !vetor_inclusao_100k || !vetor_inclusao_1m) return EXIT_FAILURE;
     if (!vetor_exclusao_1k || !vetor_exclusao_10k || !vetor_exclusao_100k || !vetor_exclusao_1m) return EXIT_FAILURE;
-    
+    if (!vetor_ordenado100k || !vetor_ordenado1m) return EXIT_FAILURE;
+
     // //----------------------------------------------------------------------------------------//
     // //                                    Benchmark Árvores ABB                               //
     // //----------------------------------------------------------------------------------------//
@@ -80,71 +84,75 @@ int main() {
     //     free(exc_arvoreABB100k);
     //     free(exc_arvoreABB1m);
     // }
+    //----------------------------------------------------------------------------------------//
+    //                                    Benchmark Árvores AVL                               //
+    //----------------------------------------------------------------------------------------//
+    //Criando arvores AVL
+    printf("-------Criação AVL----\n");
+    pDArvore arvoreAVL1k       = criarArvoreAVL(vetor1k,   T1K);
+    pDArvore arvoreAVL10k      = criarArvoreAVL(vetor10k,  T10K);
+    pDArvore exc_arvoreAVL1k   = criarArvoreAVL(vetor1k,   T1K);
+    pDArvore exc_arvoreAVL10k  = criarArvoreAVL(vetor10k,  T10K);
+
+    pDArvore arvoreAVL100k     = criarArvoreAVLBalanceada(vetor_ordenado100k, T100K);
+    pDArvore arvoreAVL1m       = criarArvoreAVLBalanceada(vetor_ordenado1m,   T1M);
+    pDArvore exc_arvoreAVL100k = criarArvoreAVLBalanceada(vetor_ordenado100k, T100K);
+    pDArvore exc_arvoreAVL1m   = criarArvoreAVLBalanceada(vetor_ordenado1m,   T1M);
+    printf("-------Busca AVL------\n");
+    benchmarkOperacaoBuscaABBVL(arvoreAVL1k,   buscarInfoAVL, vetor_busca_1k,   100,   "AVL");
+    benchmarkOperacaoBuscaABBVL(arvoreAVL10k,  buscarInfoAVL, vetor_busca_10k,  T1K,   "AVL");
+    benchmarkOperacaoBuscaABBVL(arvoreAVL100k, buscarInfoAVL, vetor_busca_100k, T10K,  "AVL");
+    benchmarkOperacaoBuscaABBVL(arvoreAVL1m,   buscarInfoAVL, vetor_busca_1m,   T100K, "AVL");
+    printf("-------Inclusão AVL---\n");
+    benchmarkOperacaoInclusaoABBVL(arvoreAVL1k,   incluirInfoAVL, vetor_inclusao_1k,   100,   "AVL", 0);
+    benchmarkOperacaoInclusaoABBVL(arvoreAVL10k,  incluirInfoAVL, vetor_inclusao_10k,  T1K,   "AVL", 0);
+    benchmarkOperacaoInclusaoABBVL(arvoreAVL100k, incluirInfoAVL, vetor_inclusao_100k, T10K,  "AVL", 1);
+    benchmarkOperacaoInclusaoABBVL(arvoreAVL1m,   incluirInfoAVL, vetor_inclusao_1m,   T100K, "AVL", 1);
+    // printf("-------Exclusão AVL---\n");
+    // benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL1k,   excluirInfoAVL, vetor_exclusao_1k,   100,   "AVL");
+    // benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL10k,  excluirInfoAVL, vetor_exclusao_10k,  T1K,   "AVL");
+    // benchmarkOperacaoBuscaABBVL(exc_arvoreAVL10k, buscarInfoAVL, vetor_exclusao_10k, T1K,   "AVL");
+    // benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL100k, excluirInfoAVL, vetor_exclusao_100k, T10K,  "AVL");
+    // benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL1m,   excluirInfoAVL, vetor_exclusao_1m,   T100K, "AVL");
+    //Free ABB
+    {
+        free(arvoreAVL1k);
+        free(arvoreAVL10k);
+        free(arvoreAVL100k);
+        free(arvoreAVL1m);
+        free(exc_arvoreAVL1k);
+        free(exc_arvoreAVL10k);
+        free(exc_arvoreAVL100k);
+        free(exc_arvoreAVL1m);
+    }
 //     //----------------------------------------------------------------------------------------//
-//     //                                    Benchmark Árvores AVL                               //
+//     //                                    Benchmark Árvores RB                                //
 //     //----------------------------------------------------------------------------------------//
-//     //Criando arvores AVL
-//     printf("-------Criação AVL----\n");
-//     pDArvore arvoreAVL1k   = criarArvoreAVL(vetor1k,   T1K);
-//     pDArvore arvoreAVL10k  = criarArvoreAVL(vetor10k,  T10K);
-//    // pDArvore arvoreAVL100k = criarArvoreAVL(vetor100k, T100K);
-//    // pDArvore arvoreAVL1m   = criarArvoreAVL(vetor1m,   T1M);
-//     pDArvore exc_arvoreAVL1k   = criarArvoreAVL(vetor1k,   T1K);
-//     pDArvore exc_arvoreAVL10k  = criarArvoreAVL(vetor10k,  T10K);
-//     //pDArvore exc_arvoreAVL100k = criarArvoreAVL(vetor100k, T100K);
-//     //pDArvore exc_arvoreAVL1m   = criarArvoreAVL(vetor1m,   T1M);
-//     printf("-------Busca AVL------\n");
-//     benchmarkOperacaoBuscaABBVL(arvoreAVL1k,   buscarInfoAVL, vetor_busca_1k,   100,   "AVL");
-//     benchmarkOperacaoBuscaABBVL(arvoreAVL10k,  buscarInfoAVL, vetor_busca_10k,  T1K,   "AVL");
-//     //benchmarkOperacaoBuscaABBVL(arvoreAVL100k, buscarInfoAVL, vetor_busca_100k, T10K,  "AVL");
-//     //benchmarkOperacaoBuscaABBVL(arvoreAVL1m,   buscarInfoAVL, vetor_busca_1m,   T100K, "AVL");
-//     printf("-------Inclusão AVL---\n");
-//     benchmarkOperacaoInclusaoABBVL(arvoreAVL1k,   incluirInfoAVL, vetor_inclusao_1k,   100,   "AVL");
-//     benchmarkOperacaoInclusaoABBVL(arvoreAVL10k,  incluirInfoAVL, vetor_inclusao_10k,  T1K,   "AVL");
-//     //benchmarkOperacaoInclusaoABBVL(arvoreAVL100k, incluirInfoAVL, vetor_inclusao_100k, T10K,  "AVL");
-//     //benchmarkOperacaoInclusaoABBVL(arvoreAVL1m,   incluirInfoAVL, vetor_inclusao_1m,   T100K, "AVL");
-//     printf("-------Exclusão AVL---\n");
-//     benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL1k,   excluirInfoAVL, vetor_exclusao_1k,   100,   "AVL");
-//     benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL10k,  excluirInfoAVL, vetor_exclusao_10k,  T1K,   "AVL");
-//     benchmarkOperacaoBuscaABBVL(exc_arvoreAVL10k, buscarInfoAVL, vetor_exclusao_10k, T1K,   "AVL");
-//     //benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL100k, excluirInfoAVL, vetor_exclusao_100k, T10K,  "AVL");
-//     //benchmarkOperacaoExclusaoABBVL(exc_arvoreAVL1m,   excluirInfoAVL, vetor_exclusao_1m,   T100K, "AVL");
-//     //Free ABB
-//     {
-//         free(arvoreAVL1k);
-//         free(arvoreAVL10k);
-//         // free(arvoreAVL100k);
-//         // free(arvoreAVL1m);
-//         free(exc_arvoreAVL1k);
-//         free(exc_arvoreAVL10k);
-//         // free(exc_arvoreAVL100k);
-//         // free(exc_arvoreAVL1m);
-//     }
-    //Criando arvores ABB
-    printf("-------Criação RB-----\n");
-    pDArvoreRb arvoreRB1k   = criarArvoreRb(vetor1k,   T1K);
-    pDArvoreRb arvoreRB10k  = criarArvoreRb(vetor10k,  T10K);
-    pDArvoreRb arvoreRB100k = criarArvoreRb(vetor100k, T100K);
-    pDArvoreRb arvoreRB1m   = criarArvoreRb(vetor1m,   T1M);
-    pDArvoreRb exc_arvoreRB1k   = criarArvoreRb(vetor1k,   T1K);
-    pDArvoreRb exc_arvoreRB10k  = criarArvoreRb(vetor10k,  T10K);
-    pDArvoreRb exc_arvoreRB100k = criarArvoreRb(vetor100k, T100K);
-    pDArvoreRb exc_arvoreRB1m   = criarArvoreRb(vetor1m,   T1M);
-    printf("-------Busca RB------\n");
-    benchmarkOperacaoBuscaRB(arvoreRB1k,   buscarInfoRb, vetor_busca_1k,   100   );
-    benchmarkOperacaoBuscaRB(arvoreRB10k,  buscarInfoRb, vetor_busca_10k,  T1K   );
-    benchmarkOperacaoBuscaRB(arvoreRB100k, buscarInfoRb, vetor_busca_100k, T10K  );
-    benchmarkOperacaoBuscaRB(arvoreRB1m,   buscarInfoRb, vetor_busca_1m,   T100K );
-    printf("-------Inclusão RB---\n");
-    benchmarkOperacaoInclusaoRB(arvoreRB1k,   incluirInfoRb, vetor_inclusao_1k,   100   );
-    benchmarkOperacaoInclusaoRB(arvoreRB10k,  incluirInfoRb, vetor_inclusao_10k,  T1K   );
-    benchmarkOperacaoInclusaoRB(arvoreRB100k, incluirInfoRb, vetor_inclusao_100k, T10K  );
-    benchmarkOperacaoInclusaoRB(arvoreRB1m,   incluirInfoRb, vetor_inclusao_1m,   T100K );
-    // printf("-------Exclusão ABB---\n");
-    // benchmarkOperacaoExclusaoABBVL(exc_arvoreRB1k,   excluirInfoRb, vetor_exclusao_1k,   100,   "RB");
-    // benchmarkOperacaoExclusaoABBVL(exc_arvoreRB10k,  excluirInfoRb, vetor_exclusao_10k,  T1K,   "RB");
-    // benchmarkOperacaoExclusaoABBVL(exc_arvoreRB100k, excluirInfoRb, vetor_exclusao_100k, T10K,  "RB");
-    // benchmarkOperacaoExclusaoABBVL(exc_arvoreRB1m,   excluirInfoRb, vetor_exclusao_1m,   T100K, "RB");
+    // //Criando arvores RB
+    // printf("-------Criação RB-----\n");
+    // pDArvoreRb arvoreRB1k   = criarArvoreRb(vetor1k,   T1K);
+    // pDArvoreRb arvoreRB10k  = criarArvoreRb(vetor10k,  T10K);
+    // pDArvoreRb arvoreRB100k = criarArvoreRb(vetor100k, T100K);
+    // pDArvoreRb arvoreRB1m   = criarArvoreRb(vetor1m,   T1M);
+    // pDArvoreRb exc_arvoreRB1k   = criarArvoreRb(vetor1k,   T1K);
+    // pDArvoreRb exc_arvoreRB10k  = criarArvoreRb(vetor10k,  T10K);
+    // pDArvoreRb exc_arvoreRB100k = criarArvoreRb(vetor100k, T100K);
+    // pDArvoreRb exc_arvoreRB1m   = criarArvoreRb(vetor1m,   T1M);
+    // printf("-------Busca RB------\n");
+    // benchmarkOperacaoBuscaRB(arvoreRB1k,   buscarInfoRb, vetor_busca_1k,   100   );
+    // benchmarkOperacaoBuscaRB(arvoreRB10k,  buscarInfoRb, vetor_busca_10k,  T1K   );
+    // benchmarkOperacaoBuscaRB(arvoreRB100k, buscarInfoRb, vetor_busca_100k, T10K  );
+    // benchmarkOperacaoBuscaRB(arvoreRB1m,   buscarInfoRb, vetor_busca_1m,   T100K );
+    // printf("-------Inclusão RB---\n");
+    // benchmarkOperacaoInclusaoRB(arvoreRB1k,   incluirInfoRb, vetor_inclusao_1k,   100   );
+    // benchmarkOperacaoInclusaoRB(arvoreRB10k,  incluirInfoRb, vetor_inclusao_10k,  T1K   );
+    // benchmarkOperacaoInclusaoRB(arvoreRB100k, incluirInfoRb, vetor_inclusao_100k, T10K  );
+    // benchmarkOperacaoInclusaoRB(arvoreRB1m,   incluirInfoRb, vetor_inclusao_1m,   T100K );
+    // printf("-------Exclusão RB---\n");
+    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB1k,   excluirInfoRb, vetor_exclusao_1k,   100,   "RB");
+    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB10k,  excluirInfoRb, vetor_exclusao_10k,  T1K,   "RB");
+    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB100k, excluirInfoRb, vetor_exclusao_100k, T10K,  "RB");
+    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB1m,   excluirInfoRb, vetor_exclusao_1m,   T100K, "RB");
 
 
     // free(arvoreAVL1k);

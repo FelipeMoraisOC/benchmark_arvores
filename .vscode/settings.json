@@ -5,6 +5,7 @@
         "utils.h": "c",
         "arvores.h": "c",
         "bm_avl.h": "c",
-        "random": "c"
+        "random": "c",
+        "8_altura.h": "c"
     }
 }

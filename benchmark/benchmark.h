@@ -1,7 +1,7 @@
-#ifndef BENCHMARK_ABB
-#define BENCHMARK_ABB
+#ifndef BENCHMARK_H
+#define BENCHMARK_H
 
-double benchmarkOperacaoInclusaoABBVL(pDArvore arvore, FuncaoInclusao fi, int* vetor_inclusao, size_t tamanho, char* nome_arvore)
+double benchmarkOperacaoInclusaoABBVL(pDArvore arvore, FuncaoInclusao fi, int* vetor_inclusao, size_t tamanho, char* nome_arvore, int mostrarStatus)
 {
     int qtd_nohs = arvore->quantidadeNohs;
 
@@ -10,6 +10,13 @@ double benchmarkOperacaoInclusaoABBVL(pDArvore arvore, FuncaoInclusao fi, int* v
 
     for (size_t i = 0; i < tamanho; i++) {
         fi(arvore, alocaInt(vetor_inclusao[i]), comparaInt);
+        if(mostrarStatus)
+        {
+            if ((i + 1) % 10000 == 0) {
+                printf("Inseridos %s dados na AVL %s...\n", formatarMilhar(i + 1), formatarMilhar(tamanho));
+                fflush(stdout); // Garante que a saída seja exibida imediatamente
+            }
+        }
     }
 
     gettimeofday(&fim, NULL);
@@ -22,7 +29,7 @@ double benchmarkOperacaoInclusaoABBVL(pDArvore arvore, FuncaoInclusao fi, int* v
     return tempo_decorrido;
 }
 
-double benchmarkOperacaoBuscaABBAVL(pDArvore arvore, FuncaoBusca fb, int* vetor_busca, size_t tamanho, char* nome_arvore)
+double benchmarkOperacaoBuscaABBVL(pDArvore arvore, FuncaoBusca fb, int* vetor_busca, size_t tamanho, char* nome_arvore)
 {
     int qtd_nohs = arvore->quantidadeNohs;
     int qtd_busca_sucesso = 0;
@@ -44,7 +51,7 @@ double benchmarkOperacaoBuscaABBAVL(pDArvore arvore, FuncaoBusca fb, int* vetor_
     return tempo_decorrido;
 }
 
-double benchmarkOperacaoExclusaoABBAVL(pDArvore arvore, FuncaoExclusao fe, int* vetor_exclusao, size_t tamanho, char* nome_arvore)
+double benchmarkOperacaoExclusaoABBVL(pDArvore arvore, FuncaoExclusao fe, int* vetor_exclusao, size_t tamanho, char* nome_arvore)
 {
     int qtd_nohs = arvore->quantidadeNohs;
     int qtd_exclusao_sucesso = 0;
