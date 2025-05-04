@@ -10,7 +10,7 @@ void gerarTabelaMarkdown(BenchmarkResultados resultados[], int tamanhos[], int n
     }
 
     // Escreve o título e o cabeçalho da tabela
-    fprintf(arquivo, "### 🧪 Tabela de Resultados Esperada\n\n");
+    fprintf(arquivo, "### 🧪 Tabela de Resultados\n\n");
     fprintf(arquivo, "| Qtde de chaves | ABB Inserção | ABB Exclusão | ABB Busca | AVL Inserção | AVL Exclusão | AVL Busca | RB Inserção | RB Exclusão | RB Busca |\n");
     fprintf(arquivo, "|----------------|--------------|--------------|-----------|--------------|--------------|-----------|-------------|-------------|----------|\n");
 
