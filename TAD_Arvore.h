@@ -12,6 +12,13 @@ typedef NohArvore*        pNohArvore;
 typedef struct dArvore  DArvore;
 typedef DArvore*        pDArvore;
 
+
+typedef struct nohArvoreRb  NohArvoreRb;
+typedef NohArvoreRb*        pNohArvoreRb;
+
+typedef struct dArvoreRb  DArvoreRb;
+typedef DArvoreRb*        pDArvoreRb;
+
 /* tipos referentes aos ponteiros para funcao */
 typedef int  (*FuncaoComparacao)(void*, void*);
 typedef void (*FuncaoImpressao) (void*);
@@ -22,7 +29,7 @@ typedef int  (*FuncaoBusca)(pDArvore, void*, FuncaoComparacao);
 
 typedef void (*FuncaoInclusaoRB)(pDArvoreRb, void*, FuncaoComparacao);
 typedef int  (*FuncaoExclusaoRB)(pDArvoreRb, void*, FuncaoComparacao);
-typedef int  (*FuncaoBuscaRB)(pDArvoreRb, void*, FuncaoComparacao);
+typedef int  (*FuncaoBuscaRB)(pDArvoreRb,    void*, FuncaoComparacao);
 
 
 
@@ -51,23 +58,17 @@ void       incluirInfoAVL       (pDArvore, void *, FuncaoComparacao);
 int        excluirInfoAVL       (pDArvore, void *, FuncaoComparacao);
 int        buscarInfoAVL        (pDArvore, void *, FuncaoComparacao);
 
-void      recalcularFBRecursiva (pNohArvore raiz);
-int       altura                (pDArvore);
-int       alturaRecursivo       (pNohArvore raiz);
-
+void       recalcularFBRecursiva (pNohArvore raiz);
+int        altura                (pDArvore);
+int        alturaRecursivo       (pNohArvore raiz);
 
 /* 🔴 Rubro Negra ⚫*/
-typedef struct nohArvoreRb  NohArvoreRb;
-typedef NohArvoreRb*        pNohArvoreRb;
-
-typedef struct dArvoreRb  DArvoreRb;
-typedef DArvoreRb*        pDArvoreRb;
-
 pDArvoreRb  criarArvoreRb();
 
 void         incluirInfoRb      (pDArvoreRb, void *, FuncaoComparacao);
 int          excluirInfoRb      (pDArvoreRb, void *, FuncaoComparacao);
-pNohArvoreRb buscarInfoRb       (pDArvoreRb, void *, FuncaoComparacao);
+int          buscarInfoRb       (pDArvoreRb, void *, FuncaoComparacao);
+
 
 void recolorir(pNohArvoreRb);
 
