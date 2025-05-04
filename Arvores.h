@@ -30,6 +30,7 @@
 #include "operacoes/rb/4_buscarInfo.h"
 #include "operacoes/rb/5_desenhaArvore.h"
 
+#include "benchmark/TAD_benchmark.h"
 #include "benchmark/benchmark.h"
 
 #endif

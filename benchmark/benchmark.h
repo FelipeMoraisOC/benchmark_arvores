@@ -1,6 +1,38 @@
 #ifndef BENCHMARK_H
 #define BENCHMARK_H
 
+// Função para gerar o arquivo resultados.md com a tabela de benchmarks
+void gerarTabelaMarkdown(BenchmarkResultados resultados[], int tamanhos[], int num_tamanhos) {
+    FILE *arquivo = fopen("resultados.md", "w");
+    if (!arquivo) {
+        perror("Erro ao criar o arquivo resultados.md");
+        return;
+    }
+
+    // Escreve o título e o cabeçalho da tabela
+    fprintf(arquivo, "### 🧪 Tabela de Resultados Esperada\n\n");
+    fprintf(arquivo, "| Qtde de chaves | ABB Inserção | ABB Exclusão | ABB Busca | AVL Inserção | AVL Exclusão | AVL Busca | RB Inserção | RB Exclusão | RB Busca |\n");
+    fprintf(arquivo, "|---------------:|-------------:|-------------:|----------:|-------------:|-------------:|----------:|------------:|------------:|---------:|\n");
+
+    // Escreve os dados de cada linha da tabela
+    for (int i = 0; i < num_tamanhos; i++) {
+        fprintf(arquivo,
+                "| %'d | %.3f ms | %.3f ms | %.3f ms | %.3f ms | %.3f ms | %.3f ms | %.3f ms | %.3f ms | %.3f ms |\n",
+                tamanhos[i],
+                resultados[i].abb_insercao,
+                resultados[i].abb_exclusao,
+                resultados[i].abb_busca,
+                resultados[i].avl_insercao,
+                resultados[i].avl_exclusao,
+                resultados[i].avl_busca,
+                resultados[i].rb_insercao,
+                resultados[i].rb_exclusao,
+                resultados[i].rb_busca);
+    }
+
+    fclose(arquivo);
+}
+
 double benchmarkOperacaoInclusaoABBVL(pDArvore arvore, FuncaoInclusao fi, int* vetor_inclusao, size_t tamanho, char* nome_arvore, int mostrarStatus)
 {
     int qtd_nohs = arvore->quantidadeNohs;
