@@ -16,6 +16,10 @@ typedef DArvore*        pDArvore;
 typedef int  (*FuncaoComparacao)(void*, void*);
 typedef void (*FuncaoImpressao) (void*);
 
+typedef void (*FuncaoInclusao)(pDArvore, void*, FuncaoComparacao);
+typedef int  (*FuncaoExclusao)(pDArvore, void*, FuncaoComparacao);
+typedef int  (*FuncaoBusca)(pDArvore, void*, FuncaoComparacao);
+
 
 
 int       grau            (pDArvore);

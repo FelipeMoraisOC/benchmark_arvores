@@ -4,6 +4,7 @@
         "time.h": "c",
         "utils.h": "c",
         "arvores.h": "c",
-        "bm_avl.h": "c"
+        "bm_avl.h": "c",
+        "random": "c"
     }
 }

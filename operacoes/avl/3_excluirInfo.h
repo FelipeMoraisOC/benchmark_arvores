@@ -1,7 +1,7 @@
 #ifndef EXCLUIRINFO_ARVORE_AVL_H
 #define EXCLUIRINFO_ARVORE_AVL_H
 
-pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao pfc){
+pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao pfc, int* removido){
 
     /*Caso A*/
     /*Nó com FB -2 e filho com FB = -1 ou 0        */
@@ -23,9 +23,9 @@ pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao
 
     //Casos recursivos
     if(comparacao > 0) 
-        raiz->esquerda = excluirInfoAVLRecursivo(raiz->esquerda, info, pfc);
+        raiz->esquerda = excluirInfoAVLRecursivo(raiz->esquerda, info, pfc, removido);
     if(comparacao < 0)
-        raiz->direita = excluirInfoAVLRecursivo(raiz->direita, info, pfc);
+        raiz->direita = excluirInfoAVLRecursivo(raiz->direita, info, pfc, removido);
 
     //Caso Base
     if(comparacao == 0 )
@@ -103,11 +103,12 @@ pNohArvore excluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao
 
 /* ----------------------------------------------------------*/
 int excluirInfoAVL(pDArvore arvore, void *info, FuncaoComparacao pfc){
+    int removido = 0;
 
-   arvore->raiz = excluirInfoAVLRecursivo(arvore->raiz, info, pfc);
-   /* estah assumindo que sempre excluira */
-   arvore->quantidadeNohs--;
-   return 1;
+    arvore->raiz = excluirInfoAVLRecursivo(arvore->raiz, info, pfc, &removido);
+
+    if(removido) arvore->quantidadeNohs--;
+    return removido;
 }
 
 #endif

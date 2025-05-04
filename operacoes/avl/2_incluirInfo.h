@@ -104,8 +104,8 @@ pNohArvore incluirInfoAVLRecursivo(pNohArvore raiz, void *info, FuncaoComparacao
 
 /* ----------------------------------------------------------*/
 void incluirInfoAVL(pDArvore arvore, void *info, FuncaoComparacao pfc){
-
     arvore->raiz = incluirInfoAVLRecursivo(arvore->raiz, info, pfc);
+    arvore->quantidadeNohs++;
 }
 
 #endif

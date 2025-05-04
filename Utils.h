@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* ---------------------------------------- */
 /* tipo de dado INT */
@@ -95,4 +96,32 @@ int* ler_arquivo_para_vetor(const char* caminho_arquivo, int tamanho) {
     return vetor;
 }
 
+char* formatarMilhar(int numero) {
+   char buffer[32];
+   snprintf(buffer, sizeof(buffer), "%d", numero);
+
+   int len = strlen(buffer);
+   int pontos = (len - 1) / 3;
+   int novo_tamanho = len + pontos + 1; // +1 para o caractere nulo
+
+   char* resultado = malloc(novo_tamanho);
+   if (!resultado) return NULL;
+
+   int i = len - 1;
+   int j = novo_tamanho - 2; // posição antes do caractere nulo
+   int contador = 0;
+
+   resultado[novo_tamanho - 1] = '\0';
+
+   while (i >= 0) {
+       resultado[j--] = buffer[i--];
+       contador++;
+       if (contador == 3 && i >= 0) {
+           resultado[j--] = '.';
+           contador = 0;
+       }
+   }
+
+   return resultado;
+}
 #endif /* UTILS_H */
