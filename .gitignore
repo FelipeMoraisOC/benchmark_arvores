@@ -1,5 +1,4 @@
 #arquivos temporários (remover para versão final)
-*.txt 
 
 ## VisualStudioCode ###
 .vscode/*      # Maybe .vscode/**/* instead - see comments
