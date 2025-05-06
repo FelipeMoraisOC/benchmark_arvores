@@ -141,20 +141,20 @@ int main() {
     pDArvoreRb exc_arvoreRB100k = criarArvoreRb(vetor100k, T100K);
     pDArvoreRb exc_arvoreRB1m   = criarArvoreRb(vetor1m,   T1M);
     printf("-------Busca RB------\n");
-    resultados[0].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB1k,   buscarInfoRb, vetor_busca_1k,   100   );
-    resultados[1].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB10k,  buscarInfoRb, vetor_busca_10k,  T1K   );
-    resultados[2].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB100k, buscarInfoRb, vetor_busca_100k, T10K  );
-    resultados[3].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB1m,   buscarInfoRb, vetor_busca_1m,   T100K );
+    resultados[0].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB1k,   buscarInfoRb, vetor_busca_1k,   100);
+    resultados[1].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB10k,  buscarInfoRb, vetor_busca_10k,  T1K);
+    resultados[2].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB100k, buscarInfoRb, vetor_busca_100k, T10K);
+    resultados[3].rb_busca      = benchmarkOperacaoBuscaRB(arvoreRB1m,   buscarInfoRb, vetor_busca_1m,   T100K);
     printf("-------Inclusão RB---\n");
-    resultados[0].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB1k,   incluirInfoRb, vetor_inclusao_1k,   100   );
-    resultados[1].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB10k,  incluirInfoRb, vetor_inclusao_10k,  T1K   );
-    resultados[2].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB100k, incluirInfoRb, vetor_inclusao_100k, T10K  );
-    resultados[3].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB1m,   incluirInfoRb, vetor_inclusao_1m,   T100K );
+    resultados[0].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB1k,   incluirInfoRb, vetor_inclusao_1k,   100);
+    resultados[1].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB10k,  incluirInfoRb, vetor_inclusao_10k,  T1K);
+    resultados[2].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB100k, incluirInfoRb, vetor_inclusao_100k, T10K);
+    resultados[3].rb_insercao   = benchmarkOperacaoInclusaoRB(arvoreRB1m,   incluirInfoRb, vetor_inclusao_1m,   T100K);
     // printf("-------Exclusão RB---\n");
-    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB1k,   excluirInfoRb, vetor_exclusao_1k,   100,   "RB");
-    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB10k,  excluirInfoRb, vetor_exclusao_10k,  T1K,   "RB");
-    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB100k, excluirInfoRb, vetor_exclusao_100k, T10K,  "RB");
-    // benchmarkOperacaoExclusaoRBVL(exc_arvoreRB1m,   excluirInfoRb, vetor_exclusao_1m,   T100K, "RB");
+    // resultados[0].rb_exclusao = benchmarkOperacaoExclusaoRB(exc_arvoreRB1k,   excluirInfoRb, vetor_exclusao_1k,   100);
+    // resultados[1].rb_exclusao = benchmarkOperacaoExclusaoRB(exc_arvoreRB10k,  excluirInfoRb, vetor_exclusao_10k,  T1K);
+    // resultados[2].rb_exclusao = benchmarkOperacaoExclusaoRB(exc_arvoreRB100k, excluirInfoRb, vetor_exclusao_100k, T10K);
+    // resultados[3].rb_exclusao = benchmarkOperacaoExclusaoRB(exc_arvoreRB1m,   excluirInfoRb, vetor_exclusao_1m,   T100K);
 
     {
         free(arvoreRB1k);

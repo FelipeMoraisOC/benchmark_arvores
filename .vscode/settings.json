@@ -6,6 +6,8 @@
         "arvores.h": "c",
         "bm_avl.h": "c",
         "random": "c",
-        "8_altura.h": "c"
+        "8_altura.h": "c",
+        "2_incluirinfo.h": "c",
+        "3_excluirinfo.h": "c"
     }
 }

@@ -56,7 +56,12 @@ double benchmarkOperacaoInclusaoABBVL(pDArvore arvore, FuncaoInclusao fi, int* v
     double tempo_decorrido = (fim.tv_sec - inicio.tv_sec) * 1000.0;      // segundos para milissegundos
     tempo_decorrido += (fim.tv_usec - inicio.tv_usec) / 1000.0;          // microssegundos para milissegundos
 
-    printf("O tempo para incluir %s dados na %s %s foi: [%lf]ms (Tamanho atual: %s)\n", formatarMilhar(tamanho), nome_arvore, formatarMilhar(qtd_nohs), tempo_decorrido, formatarMilhar(arvore->quantidadeNohs));
+    printf("O tempo para incluir %s dados na %s %s foi: [%lf]ms (Tamanho atual: %s)\n",
+         formatarMilhar(tamanho), 
+         nome_arvore, 
+         formatarMilhar(qtd_nohs), 
+         tempo_decorrido, 
+         formatarMilhar(arvore->quantidadeNohs));
 
     return tempo_decorrido;
 }
